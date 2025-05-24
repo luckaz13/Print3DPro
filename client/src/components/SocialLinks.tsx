@@ -44,11 +44,11 @@ export const SocialLinks = () => {
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="bg-white p-3 rounded-full text-foreground hover:bg-primary hover:text-white transition-all border-0"
+                className="bg-white p-3 w-12 h-12 rounded-full text-foreground hover:bg-primary hover:text-white transition-all border-0 shadow-md"
                 asChild
               >
                 <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
-                  <i className={link.icon}></i>
+                  <i className={link.icon + " text-lg"}></i>
                 </a>
               </Button>
             </TooltipTrigger>
