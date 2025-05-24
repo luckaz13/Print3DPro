@@ -15,6 +15,9 @@ export const HeroSection = () => {
       </div>
       
       <div className="container mx-auto px-6 relative z-10 text-center">
+        <h2 className="text-primary font-montserrat font-bold text-2xl md:text-3xl lg:text-4xl mb-2">
+          Carossi Parts
+        </h2>
         <h1 className="text-white font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl mb-12 leading-tight">
           A fábrica das suas ideias<br />começa aqui
         </h1>
@@ -25,17 +28,17 @@ export const HeroSection = () => {
           </div>
         </div>
         
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        <div className="mt-10 flex flex-wrap justify-center gap-6">
           <ScrollToSection sectionId="orcamentos">
-            <Button variant="default" size="lg" className="btn-primary min-w-[200px]">
-              <i className="fa-solid fa-lightbulb mr-2"></i>
+            <Button variant="default" size="lg" className="btn-primary min-w-[260px] text-lg py-7 px-8">
+              <i className="fa-solid fa-lightbulb mr-2 text-xl"></i>
               Comece seu projeto
             </Button>
           </ScrollToSection>
           
           <ScrollToSection sectionId="trabalhos">
-            <Button variant="outline" size="lg" className="rounded-full border-2 border-white bg-white/20 text-white hover:bg-white hover:text-foreground min-w-[200px]">
-              <i className="fa-solid fa-images mr-2"></i>
+            <Button variant="outline" size="lg" className="rounded-full border-2 border-white bg-white/20 text-white hover:bg-white hover:text-foreground min-w-[260px] text-lg py-7 px-8">
+              <i className="fa-solid fa-images mr-2 text-xl"></i>
               Ver trabalhos
             </Button>
           </ScrollToSection>
