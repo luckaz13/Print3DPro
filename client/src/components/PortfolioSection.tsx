@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { GalleryModal } from "./GalleryModal";
+import { ImageWithLoading } from "@/components/ui/image-with-loading";
 
 type PortfolioCategory = "Todos" | "Peças Técnicas" | "Decorativos" | "Acessórios";
 
@@ -117,10 +118,11 @@ export const PortfolioSection = () => {
               className="gallery-item"
               onClick={() => handleItemClick(item)}
             >
-              <img 
-                src={item.image} 
-                alt={item.title} 
+              <ImageWithLoading
+                src={item.image}
+                alt={item.title}
                 className="w-full h-64 object-cover"
+                loadingClassName="h-64"
               />
               <div className="p-4 bg-background">
                 <h3 className="font-montserrat font-semibold text-lg mb-2">{item.title}</h3>

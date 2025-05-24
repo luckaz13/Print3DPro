@@ -37,10 +37,8 @@ export const Navbar = () => {
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "shadow-md" : ""} bg-background`}>
       <nav className="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
         <div className="flex items-center">
-          <Link href="/">
-            <a className="block w-40 md:w-48">
-              <CarossiLogo />
-            </a>
+          <Link href="/" className="block w-40 md:w-48">
+            <CarossiLogo />
           </Link>
         </div>
         

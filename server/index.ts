@@ -49,24 +49,17 @@ app.use((req, res, next) => {
   });
 
   // Setup Vite ou arquivos estáticos conforme ambiente
-  const port = 3000;
+  const port = process.env.PORT || 5000;
   if (app.get("env") === "development") {
     const { createServer } = await import("http");
     const server = createServer(app);
     await setupVite(app, server);
-    server.listen(
-      {
-        port,
-        host: "127.0.0.1",
-        reusePort: true,
-      },
-      () => {
-        log(`serving on port ${port}`);
-      }
-    );
+    server.listen(port, "0.0.0.0", () => {
+      log(`serving on port ${port}`);
+    });
   } else {
     serveStatic(app);
-    app.listen(port, "127.0.0.1", () => {
+    app.listen(port, "0.0.0.0", () => {
       log(`serving on port ${port}`);
     });
   }
