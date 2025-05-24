@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 interface PortfolioItem {
   id: string;
@@ -46,25 +47,27 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({
   };
 
   return (
-    <div 
-      className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+    <div
+      className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
     >
-      <div className="max-w-4xl mx-auto p-4 relative">
-        <button 
-          className="absolute top-4 right-4 text-white text-3xl hover:text-primary z-10"
+      <div className="max-w-4xl w-full mx-auto relative">
+        <button
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white text-2xl sm:text-3xl hover:text-primary z-10 p-2 touch-target min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 transition-all"
           onClick={onClose}
           aria-label="Fechar modal"
         >
           <i className="fas fa-times"></i>
         </button>
-        <img 
-          src={item.image} 
-          alt={item.title} 
-          className="max-w-full max-h-[80vh] object-contain"
+        <img
+          src={getAssetPath(item.image)}
+          alt={item.title}
+          className="w-full max-h-[70vh] sm:max-h-[80vh] object-contain rounded-lg"
         />
-        <h3 className="text-white text-xl font-montserrat font-semibold mt-4">{item.title}</h3>
-        <p className="text-gray-300 mt-2">{item.description}</p>
+        <div className="mt-4 px-2">
+          <h3 className="text-white text-lg sm:text-xl font-montserrat font-semibold">{item.title}</h3>
+          <p className="text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">{item.description}</p>
+        </div>
       </div>
     </div>
   );

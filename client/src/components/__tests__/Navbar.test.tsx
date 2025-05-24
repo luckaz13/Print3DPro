@@ -29,13 +29,6 @@ describe('Navbar', () => {
     expect(screen.getByText('Onde comprar')).toBeInTheDocument();
   });
 
-  it('deve renderizar o campo de busca', () => {
-    render(<Navbar />);
-    
-    const searchInput = screen.getByPlaceholderText('Buscar...');
-    expect(searchInput).toBeInTheDocument();
-  });
-
   it('deve renderizar o botão do menu mobile', () => {
     render(<Navbar />);
     

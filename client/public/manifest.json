@@ -1,0 +1,27 @@
+{
+  "name": "Print3DPro - Impressão 3D Profissional",
+  "short_name": "Print3DPro",
+  "description": "Serviços profissionais de impressão 3D com qualidade e precisão",
+  "start_url": "/Print3DPro/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "pt-BR",
+  "dir": "ltr"
+}

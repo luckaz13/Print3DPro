@@ -9,12 +9,6 @@ import { Footer } from "@/components/Footer";
 
 const Home = () => {
   useEffect(() => {
-    // Add Font Awesome script dynamically
-    const fontAwesomeScript = document.createElement("script");
-    fontAwesomeScript.src = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js";
-    fontAwesomeScript.crossOrigin = "anonymous";
-    document.body.appendChild(fontAwesomeScript);
-
     // Intersection Observer for fade-in animation
     const sections = document.querySelectorAll('section');
     
@@ -40,7 +34,6 @@ const Home = () => {
 
     return () => {
       // Cleanup
-      document.body.removeChild(fontAwesomeScript);
       sections.forEach(section => {
         if (section.id !== "") {
           sectionObserver.unobserve(section);

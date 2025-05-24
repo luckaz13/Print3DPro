@@ -2,17 +2,191 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover" />
     <meta name="description" content="Carossi Parts - A fábrica das suas ideias começa aqui. Impressões 3D de alta qualidade, projetos personalizados e peças sob medida." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Meta tags para PWA básico -->
+    <meta name="theme-color" content="#1f2937" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Carossi Parts" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Meta tags para performance e SEO -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Carossi Parts" />
+    
+    <!-- DNS Prefetch e Preconnect para domínios externos -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <title>Carossi Parts - Impressões 3D</title>
-    <script type="module" crossorigin src="/assets/index-CRM6XFa3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-gIWxqBrF.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Preload de fontes críticas com fallback para conexões lentas -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" crossorigin="anonymous"></noscript>
+    
+    <!-- Preload de imagens críticas com lazy loading -->
+    <link rel="preload" href="/Print3DPro/1.jpg" as="image" fetchpriority="high" type="image/jpeg">
+    <link rel="preload" href="/Print3DPro/2.jpg" as="image" fetchpriority="high" type="image/jpeg">
+    
+    <!-- Preload de Font Awesome com fallback -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
+    
+    <!-- Preload do script principal -->
+    <link rel="modulepreload" href="data:application/octet-stream;base64,aW1wb3J0IHsgY3JlYXRlUm9vdCB9IGZyb20gInJlYWN0LWRvbS9jbGllbnQiOwppbXBvcnQgQXBwIGZyb20gIi4vQXBwIjsKaW1wb3J0ICIuL2luZGV4LmNzcyI7CmltcG9ydCB7IFF1ZXJ5Q2xpZW50UHJvdmlkZXIgfSBmcm9tICJAdGFuc3RhY2svcmVhY3QtcXVlcnkiOwppbXBvcnQgeyBxdWVyeUNsaWVudCB9IGZyb20gIi4vbGliL3F1ZXJ5Q2xpZW50IjsKaW1wb3J0IHsgVG9vbHRpcFByb3ZpZGVyIH0gZnJvbSAiQC9jb21wb25lbnRzL3VpL3Rvb2x0aXAiOwppbXBvcnQgeyBUb2FzdGVyIH0gZnJvbSAiQC9jb21wb25lbnRzL3VpL3RvYXN0ZXIiOwoKY3JlYXRlUm9vdChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicm9vdCIpISkucmVuZGVyKAogIDxRdWVyeUNsaWVudFByb3ZpZGVyIGNsaWVudD17cXVlcnlDbGllbnR9PgogICAgPFRvb2x0aXBQcm92aWRlcj4KICAgICAgPEFwcCAvPgogICAgICA8VG9hc3RlciAvPgogICAgPC9Ub29sdGlwUHJvdmlkZXI+CiAgPC9RdWVyeUNsaWVudFByb3ZpZGVyPgopOwo=">
+    
+    <!-- Favicon e ícones para diferentes dispositivos -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/Print3DPro/manifest.json">
+    
+    <title>Print3DPro - Impressões 3D Profissionais</title>
+    
+    <!-- CSS crítico inline para evitar FOUC -->
+    <style>
+      /* CSS crítico para loading inicial */
+      #root {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: #f9fafb;
+      }
+      
+      /* Loading spinner inicial */
+      .initial-loader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 3px solid #e5e7eb;
+        border-top: 3px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      /* Otimizações para dispositivos móveis */
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        overscroll-behavior: none;
+      }
+      
+      /* Suporte a safe areas para dispositivos com notch */
+      @supports (padding: max(0px)) {
+        body {
+          padding-left: env(safe-area-inset-left);
+          padding-right: env(safe-area-inset-right);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/Print3DPro/assets/index-B5k0aGvg.js"></script>
+    <link rel="modulepreload" crossorigin href="/Print3DPro/assets/vendor-BMTn4_Up.js">
+    <link rel="modulepreload" crossorigin href="/Print3DPro/assets/ui-D4d_WkzR.js">
+    <link rel="modulepreload" crossorigin href="/Print3DPro/assets/icons-BsmdUxXX.js">
+    <link rel="stylesheet" crossorigin href="/Print3DPro/assets/index-BtmusQcb.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Loading inicial para melhor UX -->
+      <div class="initial-loader" id="initial-loader"></div>
+    </div>
+    
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+    
+    <!-- Script para remover loader inicial -->
+    <script>
+      // Remove o loader inicial quando o DOM estiver carregado
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const loader = document.getElementById('initial-loader');
+          if (loader) {
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.3s ease-out';
+            setTimeout(function() {
+              loader.remove();
+            }, 300);
+          }
+        }, 100);
+      });
+      
+      // Detectar e otimizar para conexões lentas
+      if ('connection' in navigator) {
+        const connection = navigator.connection;
+        if (connection && (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g')) {
+          // Adicionar classe para otimizações de conexão lenta
+          document.documentElement.classList.add('slow-connection');
+        }
+      }
+      
+      // Detectar capacidade de touch
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.documentElement.classList.add('touch-device');
+      }
+    </script>
+    
+    <!-- Script principal com atributo de prioridade -->
+    
+    <!-- Service Worker para cache básico (opcional) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          // Registrar service worker apenas em produção
+          if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            navigator.serviceWorker.register('/sw.js').catch(function() {
+              // Falha silenciosa se não houver service worker
+            });
+          }
+        });
+      }
+    </script>
+    
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>

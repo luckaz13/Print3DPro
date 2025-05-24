@@ -56,13 +56,48 @@ npm run test:run
 
 ## 🏗️ Build e Deploy
 
+### 🚀 Deploy no GitHub Pages
+
+O projeto está configurado para deploy automático no GitHub Pages:
+
 ```bash
-# Build para produção
+# Build otimizado para GitHub Pages
+npm run build:gh-pages
+
+# Preview local do build
+npm run preview
+
+# Deploy manual (se necessário)
+npm run deploy
+```
+
+**URL de Produção**: `https://[seu-usuario].github.io/Print3DPro/`
+
+### ⚙️ Configuração Automática
+- ✅ GitHub Actions configurado
+- ✅ Deploy automático no push para `main`
+- ✅ Build otimizado com Terser
+- ✅ Bundle splitting implementado
+- ✅ PWA features ativas
+- ✅ Service Worker para cache offline
+
+### 📊 Performance Otimizada
+- **Bundle Sizes**:
+  - Vendor: ~140KB (gzipped: ~45KB)
+  - Main: ~126KB (gzipped: ~37KB)
+  - UI: ~50KB (gzipped: ~17KB)
+  - CSS: ~81KB (gzipped: ~13KB)
+
+### 🔧 Build Local
+```bash
+# Build para produção local
 npm run build
 
 # Executar em produção
 npm start
 ```
+
+Para mais detalhes, consulte o [DEPLOY_GUIDE.md](./DEPLOY_GUIDE.md).
 
 ## 📁 Estrutura do Projeto
 
