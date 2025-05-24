@@ -7,7 +7,7 @@ export const HeroSection = () => {
     <section className="pt-20 relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1679678691006-0ad24fecb769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80" 
+          src="/3d-printer.jpg" 
           alt="3D printer in action" 
           className="w-full h-full object-cover"
         />
