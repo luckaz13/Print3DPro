@@ -34,7 +34,7 @@ export const HeroSection = () => {
           </ScrollToSection>
           
           <ScrollToSection sectionId="trabalhos">
-            <Button variant="outline" size="lg" className="rounded-full border-2 border-white text-white hover:bg-white hover:text-foreground min-w-[200px]">
+            <Button variant="outline" size="lg" className="rounded-full border-2 border-white bg-white/20 text-white hover:bg-white hover:text-foreground min-w-[200px]">
               <i className="fa-solid fa-images mr-2"></i>
               Ver trabalhos
             </Button>
