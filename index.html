@@ -149,6 +149,13 @@
         min-height: 100vh;
         min-height: 100dvh;
         background-color: #f9fafb;
+        transition: background-color 0.3s ease;
+      }
+      
+      /* Dark mode para loading inicial */
+      .dark #root {
+        background-color: #212121;
+        color: #fafafa;
       }
       
       /* Loading spinner inicial */
@@ -192,10 +199,10 @@
         }
       }
     </style>
-    <script type="module" crossorigin src="/Print3DPro/js/index-B7Lbxptf.js"></script>
+    <script type="module" crossorigin src="/Print3DPro/js/index-CYJbRrmw.js"></script>
     <link rel="modulepreload" crossorigin href="/Print3DPro/js/vendor-D-rq3WUT.js">
     <link rel="modulepreload" crossorigin href="/Print3DPro/js/ui-CLB8tS8c.js">
-    <link rel="stylesheet" crossorigin href="/Print3DPro/css/index-Y2VMBbwr.css">
+    <link rel="stylesheet" crossorigin href="/Print3DPro/css/index-FqS1ke2k.css">
   </head>
   <body>
     <div id="root">
@@ -228,8 +235,19 @@
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
     
-    <!-- Script para remover loader inicial -->
+    <!-- Script para aplicar Dark Mode imediatamente -->
     <script>
+      // Aplicar Dark Mode imediatamente para evitar flash
+      (function() {
+        const savedMode = localStorage.getItem('darkMode');
+        // Se não há preferência salva, usar Dark Mode por padrão
+        const shouldUseDark = savedMode === null ? true : savedMode === 'true';
+        
+        if (shouldUseDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+      
       // Remove o loader inicial quando o DOM estiver carregado
       document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
