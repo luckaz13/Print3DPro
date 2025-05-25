@@ -32,7 +32,7 @@ describe('Navbar', () => {
   it('deve renderizar o botão do menu mobile', () => {
     render(<Navbar />);
     
-    const mobileMenuButton = screen.getByLabelText('Toggle menu');
+    const mobileMenuButton = screen.getByLabelText('Abrir menu');
     expect(mobileMenuButton).toBeInTheDocument();
   });
 });
