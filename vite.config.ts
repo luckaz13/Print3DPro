@@ -56,32 +56,10 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        // Estratégia otimizada de code splitting
-        manualChunks: (id) => {
-          // Vendor chunk para React e dependências core
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'react-vendor';
-            }
-            // Radix UI components em chunk separado
-            if (id.includes('@radix-ui')) {
-              return 'radix-ui';
-            }
-            // Framer Motion em chunk separado devido ao tamanho
-            if (id.includes('framer-motion')) {
-              return 'framer-motion';
-            }
-            // Ícones em chunk separado
-            if (id.includes('lucide-react') || id.includes('react-icons')) {
-              return 'icons';
-            }
-            // Utilitários de data
-            if (id.includes('date-fns')) {
-              return 'date-utils';
-            }
-            // Outras dependências vendor
-            return 'vendor';
-          }
+        // Simplificado para evitar problemas de dependências
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast']
         },
         // Otimizações de nomes de arquivos para cache
         chunkFileNames: 'js/[name]-[hash].js',
