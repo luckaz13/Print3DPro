@@ -65,7 +65,7 @@ git push origin main
 
 #### 4. **Acessar o Site**
 - URL: `https://[seu-usuario].github.io/Print3DPro/`
-- Exemplo: `https://lucascarossi.github.io/Print3DPro/`
+- Exemplo: `https://luckaz13.github.io/Print3DPro/`
 
 ## 📦 Scripts Disponíveis
 

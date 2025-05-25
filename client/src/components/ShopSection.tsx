@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { AnimatedElement, AnimatedList } from "@/components/ui/animated-element";
-import { TooltipCard } from "@/components/ui/enhanced-hover-card";
-import { MapPin, ShoppingBag, Store } from "lucide-react";
+import { AnimatedElement } from "@/components/ui/animated-element";
+import { MapPin, MessageCircle } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
 
 export const ShopSection = () => {
@@ -10,7 +9,7 @@ export const ShopSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedElement animation="fade-in" duration={800}>
           <div className="text-center mb-16">
-            <h2 className="section-heading">Onde comprar</h2>
+            <h2 className="section-heading">Onde comprar nossos produtos</h2>
             <p className="section-description">
               As fotos da galeria correspondem a projetos prontos que você encontra em nossas lojas virtuais.
             </p>
@@ -20,61 +19,66 @@ export const ShopSection = () => {
         
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatedElement animation="slide-up" duration={800} delay={200}>
-              <div className="bg-background rounded-2xl shadow-lg p-8 text-center flex flex-col items-center hover:shadow-xl transition-shadow duration-300 group">
-                <div className="h-24 mb-6 flex items-center justify-center">
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/shopee-1.svg"
-                    alt="Shopee Logo"
-                    className="h-24 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <h3 className="font-montserrat font-semibold text-xl mb-4">Shopee</h3>
-                <p className="text-muted-foreground mb-6">
-                  Encontre nossos produtos prontos para entrega com frete rápido e pagamento facilitado.
-                </p>
-                <TooltipCard tooltip="Produtos prontos para entrega" side="bottom">
-                  <Button
-                    className="bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full mt-auto transform hover:scale-[1.02] active:scale-[0.98] transition-transform min-h-[48px] px-6 py-3 touch-target"
-                    asChild
-                  >
-                    <a href="https://shopee.com.br/shop/637588572" target="_blank" rel="noopener noreferrer">
-                      <ShoppingBag className="w-4 h-4 mr-2" />
-                      Visitar loja
-                    </a>
-                  </Button>
-                </TooltipCard>
+            {/* Shopee */}
+            {/* Removido AnimatedElement para garantir visibilidade e acessibilidade dos botões */}
+            <div className="bg-background rounded-2xl shadow-lg p-8 text-center flex flex-col items-center hover:shadow-xl transition-shadow duration-300 group">
+              <div className="h-24 mb-6 flex items-center justify-center">
+                <img
+                  src="https://cdn.worldvectorlogo.com/logos/shopee-1.svg"
+                  alt="Shopee Logo"
+                  className="h-24 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            </AnimatedElement>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">Shopee</h3>
+              <p className="text-muted-foreground mb-6">
+                Encontre nossos produtos prontos para entrega com frete rápido e pagamento facilitado.
+              </p>
+              <Button
+                className="bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95"
+                asChild
+              >
+                <a
+                  href="https://shopee.com.br/carossiparts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center"
+                >
+                  Visite a loja
+                </a>
+              </Button>
+            </div>
             
-            <AnimatedElement animation="slide-up" duration={800} delay={400}>
-              <div className="bg-background rounded-2xl shadow-lg p-8 text-center flex flex-col items-center hover:shadow-xl transition-shadow duration-300 group">
-                <div className="h-24 mb-6 flex items-center justify-center bg-white rounded-lg p-2">
-                  <img
-                    src={getAssetPath("/mercado.png")}
-                    alt="Mercado Livre Logo"
-                    className="h-24 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <h3 className="font-montserrat font-semibold text-xl mb-4">Mercado Livre</h3>
-                <p className="text-muted-foreground mb-6">
-                  Compre com a segurança do Mercado Livre e aproveite o Mercado Pago e entregas rápidas.
-                </p>
-                <TooltipCard tooltip="Compre com segurança e garantia" side="bottom">
-                  <Button
-                    className="bg-yellow-500 hover:bg-yellow-600 text-foreground font-medium rounded-full mt-auto transform hover:scale-[1.02] active:scale-[0.98] transition-transform min-h-[48px] px-6 py-3 touch-target"
-                    asChild
-                  >
-                    <a href="https://lista.mercadolivre.com.br/_CustId_192984959?item_id=MLB5161827074&category_id=MLB22655&seller_id=192984959&client=recoview-selleritems&recos_listing=true#origin=vip&component=sellerData&typeSeller=classic" target="_blank" rel="noopener noreferrer">
-                      <Store className="w-4 h-4 mr-2" />
-                      Visitar loja
-                    </a>
-                  </Button>
-                </TooltipCard>
+            {/* Mercado Livre */}
+            {/* Removido AnimatedElement para garantir visibilidade e acessibilidade dos botões */}
+            <div className="bg-background rounded-2xl shadow-lg p-8 text-center flex flex-col items-center hover:shadow-xl transition-shadow duration-300 group">
+              <div className="h-24 mb-6 flex items-center justify-center bg-white rounded-lg p-2">
+                <img
+                  src={getAssetPath("/mercado.png")}
+                  alt="Mercado Livre Logo"
+                  className="h-24 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            </AnimatedElement>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">Mercado Livre</h3>
+              <p className="text-muted-foreground mb-6">
+                Compre com a segurança do Mercado Livre e aproveite o Mercado Pago e entregas rápidas.
+              </p>
+              <Button
+                className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95"
+                asChild
+              >
+                <a
+                  href="https://lista.mercadolivre.com.br/_CustId_192984959?item_id=MLB5161827074&category_id=MLB22655&seller_id=192984959&client=recoview-selleritems&recos_listing=true#origin=vip&component=sellerData&typeSeller=classic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center"
+                >
+                  Visite a loja
+                </a>
+              </Button>
+            </div>
           </div>
           
+          {/* Projetos Personalizados */}
           <AnimatedElement animation="fade-in" duration={800} delay={600}>
             <div className="mt-12 bg-background rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
               <div className="flex flex-col md:flex-row items-center">
@@ -85,17 +89,20 @@ export const ShopSection = () => {
                   </p>
                 </div>
                 <div className="md:w-1/3 flex justify-center">
-                  <TooltipCard tooltip="Atendimento personalizado" side="top">
-                    <Button
-                      className="bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transform hover:scale-[1.02] active:scale-[0.98] transition-transform min-h-[48px] px-6 py-3 touch-target"
-                      asChild
+                  <Button
+                    className="bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95"
+                    asChild
+                  >
+                    <a 
+                      href="https://api.whatsapp.com/send?phone=5554991886962" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
                     >
-                      <a href="https://api.whatsapp.com/send?phone=5554991886962" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-whatsapp text-xl mr-2"></i>
-                        <span>Fale conosco</span>
-                      </a>
-                    </Button>
-                  </TooltipCard>
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      Fale Conosco
+                    </a>
+                  </Button>
                 </div>
               </div>
             </div>

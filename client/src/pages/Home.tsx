@@ -6,8 +6,19 @@ import { PortfolioSection } from "@/components/PortfolioSection";
 import { QuoteSection } from "@/components/QuoteSection";
 import { ShopSection } from "@/components/ShopSection";
 import { Footer } from "@/components/Footer";
+import { usePageTracking, useSectionTracking } from "@/hooks/use-analytics";
 
 const Home = () => {
+  // Rastrear visualização da página
+  usePageTracking('/', 'Print3DPro - Impressão 3D Profissional');
+
+  // Rastrear tempo gasto em seções principais
+  useSectionTracking('hero');
+  useSectionTracking('about');
+  useSectionTracking('portfolio');
+  useSectionTracking('quote');
+  useSectionTracking('shop');
+
   useEffect(() => {
     // Intersection Observer for fade-in animation
     const sections = document.querySelectorAll('section');

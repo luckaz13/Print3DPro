@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { AnimatedElement, AnimatedList } from "@/components/ui/animated-element";
 import { TooltipCard } from "@/components/ui/enhanced-hover-card";
-import { Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Info, MessageCircle, Instagram, Mail } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
+import { BudgetForm } from "@/components/BudgetForm";
 
 export const QuoteSection = () => {
   return (
@@ -47,7 +48,7 @@ export const QuoteSection = () => {
                   className="space-y-4"
                 >
                   {[
-                    { num: 1, text: "Entre em contato conosco pelo WhatsApp ou Instagram" },
+                    { num: 1, text: "Entre em contato conosco pelo WhatsApp, Instagram, E-mail ou preencha o formulário abaixo" },
                     { num: 2, text: "Descreva seu projeto ou envie referências visuais" },
                     { num: 3, text: "Receba uma proposta com valores e prazos" },
                     { num: 4, text: "Acompanhe o desenvolvimento do seu projeto" }
@@ -65,46 +66,76 @@ export const QuoteSection = () => {
               </div>
             </AnimatedElement>
             
-            <AnimatedElement animation="fade-in" duration={800} delay={800}>
-              <div className="flex flex-col gap-4">
-                <TooltipCard tooltip="Resposta rápida em até 2 horas" side="right">
+            {/* Botões de Contato */}
+            <AnimatedElement animation="slide-left" duration={800} delay={600}>
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-750 transition-colors duration-300">
+                <h3 className="font-montserrat font-semibold text-xl mb-6 text-center">
+                  Entre em contato conosco
+                </h3>
+                <div className="flex flex-col gap-3">
                   <Button
-                    className="bg-green-600 hover:bg-green-700 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center min-h-[56px] w-full touch-target transform hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                    className="bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95 w-full"
                     asChild
                   >
-                    <a href="https://api.whatsapp.com/send?phone=5554991886962" target="_blank" rel="noopener noreferrer">
-                      <i className="fab fa-whatsapp text-xl sm:text-2xl mr-2 sm:mr-3"></i>
-                      <span className="text-sm sm:text-base">Solicitar orçamento via WhatsApp</span>
+                    <a
+                      href="https://api.whatsapp.com/send?phone=5554991886962"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      Solicitar orçamento via WhatsApp
                     </a>
                   </Button>
-                </TooltipCard>
-                
-                <TooltipCard tooltip="Veja nosso portfólio completo" side="right">
+                  
                   <Button
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center min-h-[56px] w-full touch-target transform hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95 w-full"
                     asChild
                   >
-                    <a href="https://www.instagram.com/carossiparts/" target="_blank" rel="noopener noreferrer">
-                      <i className="fab fa-instagram text-xl sm:text-2xl mr-2 sm:mr-3"></i>
-                      <span className="text-sm sm:text-base">Contato via Instagram</span>
+                    <a
+                      href="https://www.instagram.com/carossiparts/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      <Instagram className="w-5 h-5 mr-2" />
+                      Contato via Instagram
                     </a>
                   </Button>
-                </TooltipCard>
-                
-                <TooltipCard tooltip="Envie detalhes do seu projeto" side="right">
+                  
                   <Button
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center min-h-[56px] w-full touch-target transform hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95 w-full"
                     asChild
                   >
-                    <a href="mailto:luizgeronimo00@hotmail.com">
-                      <i className="fas fa-envelope text-xl sm:text-2xl mr-2 sm:mr-3"></i>
-                      <span className="text-sm sm:text-base">Solicitar orçamento via E-mail</span>
+                    <a
+                      href="mailto:luizgeronimo00@hotmail.com"
+                      className="flex items-center justify-center"
+                    >
+                      <Mail className="w-5 h-5 mr-2" />
+                      Solicitar orçamento via e-mail
                     </a>
                   </Button>
-                </TooltipCard>
+                </div>
               </div>
             </AnimatedElement>
+            
           </div>
+        </div>
+        
+        {/* Formulário de Orçamento Online */}
+        <div className="mt-20">
+          <AnimatedElement animation="fade-in" duration={800} delay={800}>
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-white mb-4">
+                Formulário Online de Orçamento
+              </h3>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                Preencha o formulário abaixo para receber uma proposta personalizada diretamente em seu email
+              </p>
+            </div>
+          </AnimatedElement>
+          
+          <BudgetForm />
         </div>
       </div>
     </section>

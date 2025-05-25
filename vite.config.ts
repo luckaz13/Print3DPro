@@ -38,28 +38,90 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    // Otimizações para produção
+    // Otimizações avançadas para produção
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+      format: {
+        comments: false,
       },
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast'],
-          motion: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
+        // Estratégia otimizada de code splitting
+        manualChunks: (id) => {
+          // Vendor chunk para React e dependências core
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            // Radix UI components em chunk separado
+            if (id.includes('@radix-ui')) {
+              return 'radix-ui';
+            }
+            // Framer Motion em chunk separado devido ao tamanho
+            if (id.includes('framer-motion')) {
+              return 'framer-motion';
+            }
+            // Ícones em chunk separado
+            if (id.includes('lucide-react') || id.includes('react-icons')) {
+              return 'icons';
+            }
+            // Utilitários de data
+            if (id.includes('date-fns')) {
+              return 'date-utils';
+            }
+            // Outras dependências vendor
+            return 'vendor';
+          }
+        },
+        // Otimizações de nomes de arquivos para cache
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          if (!assetInfo.name) return `assets/[name]-[hash][extname]`;
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            return `img/[name]-[hash][extname]`;
+          }
+          if (/css/i.test(ext)) {
+            return `css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
         },
       },
     },
-    // Configurações de cache e compressão
-    assetsInlineLimit: 4096,
-    chunkSizeWarningLimit: 1000,
+    // Configurações otimizadas de assets
+    assetsInlineLimit: 2048, // Reduzido para melhor cache
+    chunkSizeWarningLimit: 800, // Mais restritivo
     sourcemap: false,
+    // Configurações de compressão
+    reportCompressedSize: true,
+    // Otimizações CSS
+    cssCodeSplit: true,
+    cssMinify: true,
+  },
+  // Otimizações de dependências
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'framer-motion',
+      'lucide-react',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-toast',
+    ],
+    exclude: ['@vite/client', '@vite/env'],
   },
   // Otimizações para desenvolvimento
   server: {

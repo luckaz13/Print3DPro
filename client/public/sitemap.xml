@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://luckaz13.github.io/Print3DPro/</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Images for homepage -->
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/3d-printer.jpg</image:loc>
+      <image:title>Print3DPro - Impressão 3D Profissional</image:title>
+      <image:caption>Serviços profissionais de impressão 3D</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/1.jpg</image:loc>
+      <image:title>Portfólio Print3DPro</image:title>
+      <image:caption>Exemplo de trabalho de impressão 3D</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/2.jpg</image:loc>
+      <image:title>Portfólio Print3DPro</image:title>
+      <image:caption>Exemplo de trabalho de impressão 3D</image:caption>
+    </image:image>
+    
+    <!-- Portfolio images -->
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/port1.jpg</image:loc>
+      <image:title>Portfólio Print3DPro - Projeto 1</image:title>
+      <image:caption>Projeto de impressão 3D personalizada</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/port2.jpg</image:loc>
+      <image:title>Portfólio Print3DPro - Projeto 2</image:title>
+      <image:caption>Projeto de impressão 3D personalizada</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/port3.jpg</image:loc>
+      <image:title>Portfólio Print3DPro - Projeto 3</image:title>
+      <image:caption>Projeto de impressão 3D personalizada</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/port4.jpg</image:loc>
+      <image:title>Portfólio Print3DPro - Projeto 4</image:title>
+      <image:caption>Projeto de impressão 3D personalizada</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://luckaz13.github.io/Print3DPro/port5.jpg</image:loc>
+      <image:title>Portfólio Print3DPro - Projeto 5</image:title>
+      <image:caption>Projeto de impressão 3D personalizada</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- 404 Page -->
+  <url>
+    <loc>https://luckaz13.github.io/Print3DPro/404.html</loc>
+    <lastmod>2025-01-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  
+</urlset>

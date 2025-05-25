@@ -59,16 +59,15 @@ export const SocialLinks = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className={`${link.bgColor} ${link.hoverBgColor} ${link.textColor} p-3 sm:p-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all border-0 shadow-md mb-1 transform hover:scale-110 active:scale-95 hover:rotate-3 hover:shadow-lg min-w-[44px] min-h-[44px] flex items-center justify-center`}
-                  asChild
-                >
-                  <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+                <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className={`${link.bgColor} ${link.hoverBgColor} ${link.textColor} p-3 sm:p-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all border-0 shadow-md mb-1 transform hover:scale-110 active:scale-95 hover:rotate-3 hover:shadow-lg min-w-[44px] min-h-[44px] flex items-center justify-center`}
+                  >
                     <i className={link.icon + " text-base sm:text-lg"}></i>
-                  </a>
-                </Button>
+                  </Button>
+                </a>
               </TooltipTrigger>
               <TooltipContent
                 side="bottom"

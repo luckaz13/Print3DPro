@@ -34,7 +34,8 @@ export const RippleEffect: React.FC<
     }
   }, [ripples, duration]);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Não interferir com links e navegação - permitir que o evento continue
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -54,8 +55,8 @@ export const RippleEffect: React.FC<
   return (
     <div
       className={cn("relative overflow-hidden", className)}
-      onMouseDown={handleMouseDown}
-      style={{ isolation: "isolate" }}
+      onClick={handleClick}
+      style={{ isolation: "isolate", pointerEvents: "none" }}
     >
       {ripples.map((ripple) => (
         <span
@@ -86,7 +87,9 @@ export const RippleEffect: React.FC<
           }
         }
       `}</style>
-      {children}
+      <div style={{ pointerEvents: "auto" }}>
+        {children}
+      </div>
     </div>
   );
 };

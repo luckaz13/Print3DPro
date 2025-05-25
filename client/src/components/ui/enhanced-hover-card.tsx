@@ -38,10 +38,7 @@ export const EnhancedHoverCard: React.FC<EnhancedHoverCardProps> = ({
   return (
     <HoverCard openDelay={openDelay} closeDelay={closeDelay}>
       <HoverCardTrigger asChild className={cn("cursor-pointer", className)}>
-        <div className="relative group">
-          {trigger}
-          <span className="absolute -inset-1 rounded-lg bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
+        {trigger}
       </HoverCardTrigger>
       <HoverCardContent
         side={side}

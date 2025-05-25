@@ -1,9 +1,10 @@
-// Service Worker para Print3DPro
+// Service Worker para Print3DPro PWA
 // Versão do cache - incrementar quando houver mudanças
-const CACHE_VERSION = 'v1.0.0';
+const CACHE_VERSION = 'v1.1.0';
 const CACHE_NAME = `print3dpro-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `print3dpro-runtime-${CACHE_VERSION}`;
 
-// Recursos para cache
+// Recursos essenciais para cache
 const STATIC_CACHE_URLS = [
   '/Print3DPro/',
   '/Print3DPro/index.html',
@@ -16,8 +17,21 @@ const IMAGE_CACHE_URLS = [
   '/Print3DPro/1.jpg',
   '/Print3DPro/2.jpg',
   '/Print3DPro/3d-printer.jpg',
-  '/Print3DPro/generated-icon.png'
+  '/Print3DPro/generated-icon.png',
+  '/Print3DPro/carossi1.png'
 ];
+
+// URLs que devem sempre vir da rede
+const NETWORK_ONLY_URLS = [
+  '/api/',
+  '/analytics'
+];
+
+// Configurações de cache
+const CACHE_CONFIG = {
+  maxAge: 24 * 60 * 60 * 1000, // 24 horas
+  maxEntries: 100
+};
 
 // Instalação do Service Worker
 self.addEventListener('install', (event) => {
@@ -76,6 +90,12 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== location.origin) {
     return;
   }
+
+  // URLs que devem sempre usar a rede
+  if (NETWORK_ONLY_URLS.some(pattern => url.pathname.includes(pattern))) {
+    event.respondWith(networkOnly(request));
+    return;
+  }
   
   // Estratégia Cache First para recursos estáticos
   if (isStaticResource(request)) {
@@ -94,6 +114,9 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
+
+  // Estratégia padrão para outros recursos
+  event.respondWith(networkFirst(request));
 });
 
 // Verifica se é um recurso estático
@@ -182,6 +205,35 @@ async function staleWhileRevalidate(request) {
   return cachedResponse || fetchPromise;
 }
 
+// Estratégia Network Only
+async function networkOnly(request) {
+  try {
+    return await fetch(request);
+  } catch (error) {
+    console.error('Network Only falhou:', error);
+    return new Response('Serviço não disponível offline', {
+      status: 503,
+      statusText: 'Service Unavailable'
+    });
+  }
+}
+
+// Função para limpar cache antigo
+async function cleanupCache() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const keys = await cache.keys();
+  
+  if (keys.length > CACHE_CONFIG.maxEntries) {
+    // Remove entradas mais antigas
+    const sortedKeys = keys.sort((a, b) => {
+      return new Date(a.headers.get('date')) - new Date(b.headers.get('date'));
+    });
+    
+    const keysToDelete = sortedKeys.slice(0, keys.length - CACHE_CONFIG.maxEntries);
+    await Promise.all(keysToDelete.map(key => cache.delete(key)));
+  }
+}
+
 // Listener para mensagens do cliente
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
@@ -190,6 +242,53 @@ self.addEventListener('message', (event) => {
   
   if (event.data && event.data.type === 'GET_VERSION') {
     event.ports[0].postMessage({ version: CACHE_VERSION });
+  }
+
+  if (event.data && event.data.type === 'CLEANUP_CACHE') {
+    cleanupCache();
+  }
+});
+
+// Notificações push (preparação para futuras funcionalidades)
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  const options = {
+    body: event.data.text(),
+    icon: '/Print3DPro/generated-icon.png',
+    badge: '/Print3DPro/generated-icon.png',
+    vibrate: [200, 100, 200],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {
+        action: 'explore',
+        title: 'Ver detalhes',
+        icon: '/Print3DPro/generated-icon.png'
+      },
+      {
+        action: 'close',
+        title: 'Fechar',
+        icon: '/Print3DPro/generated-icon.png'
+      }
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('Print3DPro', options)
+  );
+});
+
+// Clique em notificações
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  if (event.action === 'explore') {
+    event.waitUntil(
+      clients.openWindow('/Print3DPro/')
+    );
   }
 });
 

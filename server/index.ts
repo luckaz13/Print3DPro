@@ -2,10 +2,24 @@ import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from "cors";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Configuração de CORS
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://luckaz13.github.io']
+    : ['http://localhost:5173', 'http://localhost:4173'],
+  credentials: true
+}));
+
+// Middleware para parsing de JSON com limite de tamanho
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
+
+// Trust proxy para obter IP real
+app.set('trust proxy', 1);
 
 app.use((req, res, next) => {
   const start = Date.now();

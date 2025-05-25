@@ -13,7 +13,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <div className="w-48 sm:w-56 md:w-64 mb-6">
+            <div className="w-72 sm:w-84 md:w-96 mb-6">
               <CarossiLogo />
             </div>
             <p className="text-gray-600 mb-6">
@@ -36,36 +36,31 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-montserrat font-semibold text-xl mb-6">Links Rápidos</h3>
             <ul className="space-y-3">
               <li>
                 <ScrollToSection sectionId="quem-somos">
-                  <span className="text-gray-600 hover:text-primary flex items-center cursor-pointer py-2 touch-target min-h-[44px]">
-                    <i className="fas fa-chevron-right mr-2 text-xs"></i>
+                  <span className="text-gray-600 hover:text-primary cursor-pointer py-2 touch-target min-h-[44px] block">
                     Quem somos
                   </span>
                 </ScrollToSection>
               </li>
               <li>
                 <ScrollToSection sectionId="trabalhos">
-                  <span className="text-gray-600 hover:text-primary flex items-center cursor-pointer py-2 touch-target min-h-[44px]">
-                    <i className="fas fa-chevron-right mr-2 text-xs"></i>
+                  <span className="text-gray-600 hover:text-primary cursor-pointer py-2 touch-target min-h-[44px] block">
                     Trabalhos
                   </span>
                 </ScrollToSection>
               </li>
               <li>
                 <ScrollToSection sectionId="orcamentos">
-                  <span className="text-gray-600 hover:text-primary flex items-center cursor-pointer py-2 touch-target min-h-[44px]">
-                    <i className="fas fa-chevron-right mr-2 text-xs"></i>
+                  <span className="text-gray-600 hover:text-primary cursor-pointer py-2 touch-target min-h-[44px] block">
                     Orçamentos
                   </span>
                 </ScrollToSection>
               </li>
               <li>
                 <ScrollToSection sectionId="onde-comprar">
-                  <span className="text-gray-600 hover:text-primary flex items-center cursor-pointer py-2 touch-target min-h-[44px]">
-                    <i className="fas fa-chevron-right mr-2 text-xs"></i>
+                  <span className="text-gray-600 hover:text-primary cursor-pointer py-2 touch-target min-h-[44px] block">
                     Onde comprar
                   </span>
                 </ScrollToSection>

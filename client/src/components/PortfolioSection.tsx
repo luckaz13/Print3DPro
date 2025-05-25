@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react"; // useState will be further reduced
 import { Button } from "@/components/ui/button";
 import { GalleryModal } from "./GalleryModal";
 import { LazyImage } from "@/components/ui/lazy-image";
@@ -99,28 +99,16 @@ const portfolioItems: PortfolioItem[] = [
 ];
 
 export const PortfolioSection = () => {
-  const [activeCategory, setActiveCategory] = useState<PortfolioCategory>("Todos");
   const [modalItem, setModalItem] = useState<PortfolioItem | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
-  const [isLoading, setIsLoading] = useState(false);
 
-  const { isMobile, hasTouch } = useDeviceInfo();
-  const prefersReducedMotion = usePrefersReducedMotion();
+  // Removed: activeCategory, setActiveCategory, isLoading, setIsLoading
+  // Removed: handleCategoryClick
+
+  const { hasTouch } = useDeviceInfo(); // Removed isMobile as it's no longer used
+  const prefersReducedMotion = usePrefersReducedMotion(); // This might become unused if CardGridSkeleton is fully removed
   const { reduceAnimations, imageQuality } = usePerformanceOptimizations();
-
-  // Callback otimizado para mudança de categoria
-  const handleCategoryClick = React.useCallback((category: PortfolioCategory) => {
-    if (category === activeCategory) return;
-    
-    setIsLoading(true);
-    setActiveCategory(category);
-    
-    // Simular pequeno delay para melhor UX
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 150);
-  }, [activeCategory]);
 
   // Callback otimizado para abrir modal
   const handleItemClick = React.useCallback((item: PortfolioItem) => {
@@ -142,23 +130,10 @@ export const PortfolioSection = () => {
     setModalOpen(false);
   }, []);
 
-  // Memoização inteligente dos itens filtrados
-  const filteredItems = useSmartMemo(() => {
-    return activeCategory === "Todos" 
-      ? portfolioItems 
-      : portfolioItems.filter(item => item.category === activeCategory);
-  }, [activeCategory], true);
+  // Itens do portfólio são agora diretamente portfolioItems, pois não há filtro.
+  const filteredItems = portfolioItems; // Simplified, useSmartMemo might be overkill if portfolioItems is static
 
-  // Categorias com contadores
-  const categoriesWithCount = useSmartMemo(() => {
-    const categories: PortfolioCategory[] = ["Todos", "Peças Técnicas", "Decorativos", "Acessórios"];
-    return categories.map(category => ({
-      name: category,
-      count: category === "Todos" 
-        ? portfolioItems.length 
-        : portfolioItems.filter(item => item.category === category).length
-    }));
-  }, [], true);
+  // Removed: categoriesWithCount
 
   return (
     <Landmark role="main">
@@ -172,52 +147,16 @@ export const PortfolioSection = () => {
             <div className="section-divider"></div>
           </div>
           
-          {/* Filtros de categoria */}
-          <div className="flex justify-center mb-10 px-4">
-            <div 
-              className="flex flex-wrap justify-center gap-2 sm:inline-flex sm:rounded-md sm:shadow-sm sm:gap-0" 
-              role="group"
-              aria-label="Filtros de categoria do portfólio"
-            >
-              {categoriesWithCount.map((category, index) => (
-                <AccessibleButton
-                  key={category.name}
-                  onClick={() => handleCategoryClick(category.name)}
-                  className={`
-                    px-4 py-3 text-sm font-medium transition-all ${
-                      reduceAnimations ? 'duration-0' : 'duration-200'
-                    }
-                    ${activeCategory === category.name ? "bg-primary text-white" : "bg-muted hover:bg-muted/80"}
-                    ${index === 0 ? "rounded-lg sm:rounded-l-lg sm:rounded-r-none" : ""}
-                    ${index === categoriesWithCount.length - 1 ? "rounded-lg sm:rounded-r-lg sm:rounded-l-none" : ""}
-                    ${index !== 0 && index !== categoriesWithCount.length - 1 ? "rounded-lg sm:rounded-none" : ""}
-                  `}
-                  aria-pressed={activeCategory === category.name}
-                  aria-label={`Filtrar por ${category.name} (${category.count} itens)`}
-                >
-                  {category.name}
-                  {!isMobile && (
-                    <span className="ml-2 text-xs opacity-75">
-                      ({category.count})
-                    </span>
-                  )}
-                </AccessibleButton>
-              ))}
-            </div>
-          </div>
+          {/* Filtros de categoria removidos conforme solicitado */}
           
           {/* Grid de itens */}
-          {isLoading ? (
-            <CardGridSkeleton 
-              columns={isMobile ? 1 : 3} 
-              rows={2}
-              animate={!prefersReducedMotion}
-            />
-          ) : (
-            <div 
+          {/* Removed isLoading conditional and CardGridSkeleton as filters are gone.
+              If a general loading state for portfolioItems is ever needed, it would be separate.
+          */}
+            <div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
               role="grid"
-              aria-label={`Portfólio - ${activeCategory} (${filteredItems.length} itens)`}
+              aria-label={`Portfólio (${filteredItems.length} itens)`} // Simplified aria-label
             >
               {filteredItems.map((item, index) => (
                 <FocusIndicator key={item.id} variant="card">
@@ -281,7 +220,6 @@ export const PortfolioSection = () => {
                 </FocusIndicator>
               ))}
             </div>
-          )}
           
         </div>
 

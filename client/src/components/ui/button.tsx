@@ -44,31 +44,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
-    // Determine ripple color based on variant
-    const getRippleColor = () => {
-      switch (variant) {
-        case "default":
-          return "rgba(255, 255, 255, 0.35)";
-        case "destructive":
-          return "rgba(255, 255, 255, 0.35)";
-        case "secondary":
-          return "rgba(255, 255, 255, 0.35)";
-        case "ghost":
-        case "outline":
-        case "link":
-        default:
-          return "rgba(0, 0, 0, 0.1)";
-      }
-    };
-    
     return (
-      <RippleEffect color={getRippleColor()}>
-        <Comp
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref}
-          {...props}
-        />
-      </RippleEffect>
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     )
   }
 )
