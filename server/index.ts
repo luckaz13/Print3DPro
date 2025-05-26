@@ -9,8 +9,8 @@ const app = express();
 // Configuração de CORS
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://luckaz13.github.io']
-    : ['http://localhost:5173', 'http://localhost:4173'],
+    ? ['https://luckaz13.github.io' /* Adicionar novo domínio de produção aqui ou via process.env.PROD_CORS_ORIGIN */]
+    : true, // Permite todas as origens em desenvolvimento
   credentials: true
 }));
 
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
   });
 
   // Setup Vite ou arquivos estáticos conforme ambiente
-  const port = process.env.PORT || 5000;
+  const port = parseInt(process.env.PORT || "5000", 10);
   if (app.get("env") === "development") {
     const { createServer } = await import("http");
     const server = createServer(app);

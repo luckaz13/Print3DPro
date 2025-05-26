@@ -73,7 +73,7 @@ Este documento descreve o sistema abrangente de solicitação de orçamentos onl
 ```env
 SMTP_HOST=smtp-mail.outlook.com
 SMTP_PORT=587
-SMTP_USER=luizgeronimo00@hotmail.com
+SMTP_USER=carossiparts@gmail.com
 SMTP_PASS=sua_senha_de_aplicativo_aqui
 NODE_ENV=development
 ```
@@ -99,7 +99,7 @@ NODE_ENV=development
 
 ### Para o Administrador
 1. Configure as variáveis de ambiente no arquivo `.env`
-2. Os emails chegam automaticamente em `luizgeronimo00@hotmail.com`
+2. Os emails chegam automaticamente em `carossiparts@gmail.com`
 3. Emails incluem todas as informações do cliente
 4. Sistema registra logs de segurança no console
 5. Monitoramento automático de tentativas suspeitas

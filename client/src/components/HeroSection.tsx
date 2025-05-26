@@ -34,36 +34,17 @@ export const HeroSection = () => {
           delay={100}
           animateOnMount={isVisible}
         >
-          <h1
-            className="text-primary font-montserrat font-bold mb-4 leading-tight tracking-tight"
-            style={{
-              fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-              lineHeight: 'clamp(2.8rem, 8.5vw, 6.5rem)',
-              letterSpacing: 'clamp(-0.02em, -0.01vw, -0.04em)',
-              textShadow: '-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 0 0 8px rgba(255,255,255,0.3)'
-            }}
-          >
-            Carossi Parts
-          </h1>
-        </AnimatedElement>
-        
-        <AnimatedElement
-          animation="slide-down"
-          duration={800}
-          delay={300}
-          animateOnMount={isVisible}
-        >
-          <h2
-            className="text-primary font-montserrat font-bold mb-8 leading-tight tracking-wide"
-            style={{
-              fontSize: 'clamp(1.5rem, 4vw, 3rem)',
-              lineHeight: 'clamp(1.8rem, 4.5vw, 3.5rem)',
-              letterSpacing: 'clamp(0.02em, 0.01vw, 0.05em)',
-              textShadow: '-1.5px -1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, 1.5px 1.5px 0 #fff, 0 0 6px rgba(255,255,255,0.2)'
-            }}
-          >
-            Impressões 3D
-          </h2>
+          <div className="flex justify-center -mb-8">
+            <img
+              src={getAssetPath("/herologo2.png")}
+              alt="CarossiParts - Impressões 3D - Logo da empresa especializada em impressão 3D e fabricação de peças personalizadas"
+              className="w-auto h-auto max-w-full max-h-[300px] sm:max-h-[375px] md:max-h-[450px] lg:max-h-[525px] xl:max-h-[600px] object-contain transition-transform duration-300 hover:scale-105"
+              style={{
+                filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 16px rgba(255,255,255,0.2))',
+                minHeight: '180px'
+              }}
+            />
+          </div>
         </AnimatedElement>
         
         <AnimatedElement
@@ -73,12 +54,13 @@ export const HeroSection = () => {
           animateOnMount={isVisible}
         >
           <h3
-            className="text-white font-montserrat font-bold mb-12 leading-relaxed tracking-wide max-w-2xl mx-auto"
+            className="text-white font-montserrat font-bold mb-12 leading-tight tracking-wide max-w-2xl mx-auto"
             style={{
               fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
-              lineHeight: 'clamp(1.4rem, 3vw, 2rem)',
+              lineHeight: 'clamp(1.1rem, 2.2vw, 1.6rem)',
               letterSpacing: 'clamp(0.01em, 0.005vw, 0.02em)',
-              textShadow: '0 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.3)'
+              textShadow: '0 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.3)',
+              marginTop: '-3.5rem'
             }}
           >
             A fábrica das suas ideias<br />começa aqui
@@ -104,7 +86,7 @@ export const HeroSection = () => {
           delay={900}
           animateOnMount={isVisible}
         >
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6" style={{ marginTop: 'clamp(2rem, 4vw, 3rem)' }}>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6" style={{ marginTop: 'clamp(2rem, 4vw, 3rem)' }}>
             <ScrollToSection sectionId="orcamentos">
               <Button
                 variant="default"

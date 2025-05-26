@@ -265,11 +265,25 @@ const LazyImageGallery: React.FC<LazyImageGalleryProps> = ({
   className,
   onImageClick
 }) => {
+  const getLgColClass = (numCols: number): string => {
+    const colMap: { [key: number]: string } = {
+      1: 'lg:grid-cols-1', 2: 'lg:grid-cols-2', 3: 'lg:grid-cols-3',
+      4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-6',
+      7: 'lg:grid-cols-7', 8: 'lg:grid-cols-8', 9: 'lg:grid-cols-9',
+      10: 'lg:grid-cols-10', 11: 'lg:grid-cols-11', 12: 'lg:grid-cols-12',
+    };
+    return colMap[numCols] || 'lg:grid-cols-3'; // Fallback para 3 colunas
+  };
+
+  const lgColClass = getLgColClass(columns);
+
   return (
-    <div 
+    <div
       className={cn(
         "grid gap-4",
-        `grid-cols-1 sm:grid-cols-2 lg:grid-cols-${columns}`,
+        "grid-cols-1", // Classe base para mobile-first
+        "sm:grid-cols-2", // Para telas pequenas
+        lgColClass, // Para telas grandes, baseado em 'columns'
         className
       )}
     >
@@ -288,7 +302,7 @@ const LazyImageGallery: React.FC<LazyImageGalleryProps> = ({
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export { LazyImage, LazyImageGallery, type LazyImageProps }

@@ -1,12 +1,21 @@
 import React, { useState, useMemo } from "react"; // useState will be further reduced
+import portfolioItemsData from "@/data/portfolioItems.json";
 import { Button } from "@/components/ui/button";
 import { GalleryModal } from "./GalleryModal";
 import { LazyImage } from "@/components/ui/lazy-image";
-import { CardGridSkeleton } from "@/components/ui/skeleton-loading";
+// import { CardGridSkeleton } from "@/components/ui/skeleton-loading"; // Parece não estar mais em uso direto aqui
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { getAssetPath } from "@/lib/utils";
 import { useDeviceInfo, usePrefersReducedMotion } from "@/hooks/use-mobile";
 import { useSmartCallback, useSmartMemo, usePerformanceOptimizations } from "@/hooks/use-performance";
 import { Landmark, AccessibleButton, FocusIndicator } from "@/components/ui/accessibility-helpers";
+import { Maximize2 } from "lucide-react";
 
 type PortfolioCategory = "Todos" | "Peças Técnicas" | "Decorativos" | "Acessórios";
 
@@ -16,87 +25,11 @@ interface PortfolioItem {
   title: string;
   description: string;
   category: Exclude<PortfolioCategory, "Todos">;
+  galleryImages?: string[];
 }
 
-const portfolioItems: PortfolioItem[] = [
-  {
-    id: "1",
-    image: "/port1.jpg",
-    title: "Vaso de flor estilizado",
-    description: "Figura colecionável com acabamento artesanal e pintura detalhada.",
-    category: "Decorativos"
-  },
-  {
-    id: "2",
-    image: "/port2.jpg",
-    title: "Espigão",
-    description: "Espigão para junção de mangueiras de 1\" ou 3/4\" em ângulos de 90º ou 135º. (modelos que possuo arquivo pronto para impressão em SOLIDWORKS). É possível fazer de tamanhos e ângulos diferentes a pedido do cliente.",
-    category: "Peças Técnicas"
-  },
-  {
-    id: "3",
-    image: "/port3.jpg",
-    title: "Porta copos para carros",
-    description: "Porta copos tamanho padrão de várias marcas populares medindo 7 centímetros de diâmetro interno por 7 centímetros de altura. Furo central na parte inferior para fixação na lata do carro ou com velcro para fixação no carpete abaixo do freio de mão.",
-    category: "Decorativos"
-  },
-  {
-    id: "4",
-    image: "/port4.jpg",
-    title: "Suporte Customizado",
-    description: "Acessório funcional desenvolvido sob medida para necessidades específicas.",
-    category: "Acessórios"
-  },
-  {
-    id: "5",
-    image: "/port5.jpg",
-    title: "BiCover",
-    description: "\"Bic cover\". Esse suporte/cobertura para seu isqueiro tipo bic, além de ter um compartimento rosqueado pra você armazenar fumo, piteiras ou sedas, evita que você o perca por ser inconfundível.",
-    category: "Peças Técnicas"
-  },
-  {
-    id: "6",
-    image: "/port6.jpg",
-    title: "Cabide para capacetes",
-    description: "Suporte para capacete, leve e de fácil instalação, apenas 2 parafusos e você não tem mais capacetes rolando pela casa!",
-    category: "Acessórios"
-  },
-  {
-    id: "7",
-    image: "/port7.jpg",
-    title: "Cornetas",
-    description: "Corneta CarossiParts para moto, modelo plug & play. Instalação simples no sistema rosqueado. No modelo CG160, que possui TBI liso, é necessário usar parafusos (inclusos na compra, sem custo adicional). Ganho médio de 1,05 cavalos de potência, testado em dinamômetro. Disponível nos tamanhos de 3 cm e 6 cm de comprimento. Após a compra, informe no chat o tamanho e a cor desejados. Todas as cores estão disponíveis, mas podem ocorrer variações no prazo de entrega caso não haja matéria-prima da cor escolhida em estoque. Para modelos inéditos, será necessário envio das medidas com paquímetro. Fabricada em PLA biodegradável, resistente a combustíveis de posto (álcool e gasolina), testado e aprovado. Atenção: não suporta metanol nem nitrometano, que deformam o material. Em motores preparados, consulte seu preparador antes da instalação para avaliar se será necessário um novo acerto. As cores podem apresentar variações de tonalidade conforme o lote da matéria-prima. Garantia de 1 mês contra defeitos de fabricação. Não cobre mau uso, danos por combustível inadequado ou desgaste por instalação e remoção frequentes.",
-    category: "Decorativos"
-  },
-  {
-    id: "8",
-    image: "/port8.jpg",
-    title: "Cornetas aplicadas",
-    description: "Exemplo da instalação de uma corneta em uma moto.",
-    category: "Peças Técnicas"
-  },
-  {
-    id: "9",
-    image: "/port9.jpg",
-    title: "Suporte Multifuncional",
-    description: "Acessório versátil com múltiplas aplicações e design inteligente.",
-    category: "Acessórios"
-  },
-  {
-    id: "10",
-    image: "/port10.jpg",
-    title: "Chaveiros",
-    description: "Uma forma de você agradar os seus clientes oferecendo um mimo ou agregando um pequeno valor com a venda do seu produto com um chaveiro personalizado com a marca ou nome da sua empresa.",
-    category: "Decorativos"
-  },
-  {
-    id: "11",
-    image: "/port11.jpg",
-    title: "Peças sob medida",
-    description: "Muitos clientes necessitam de peças que não encontram no mercado para vender, e aqui, nós produzimos a peça com a maior fidelidade possível ao modelo original.",
-    category: "Peças Técnicas"
-  }
-];
+// Atribuir os dados importados à constante portfolioItems com a tipagem correta
+const portfolioItems: PortfolioItem[] = portfolioItemsData as PortfolioItem[];
 
 export const PortfolioSection = () => {
   const [modalItem, setModalItem] = useState<PortfolioItem | null>(null);
@@ -131,7 +64,10 @@ export const PortfolioSection = () => {
   }, []);
 
   // Itens do portfólio são agora diretamente portfolioItems, pois não há filtro.
-  const filteredItems = portfolioItems; // Simplified, useSmartMemo might be overkill if portfolioItems is static
+  // const filteredItems = portfolioItems; // Simplified, useSmartMemo might be overkill if portfolioItems is static
+
+  const cornetasItem = useMemo(() => portfolioItems.find(item => item.id === "7"), []); // Alterado para buscar por ID para maior robustez
+  const otherItems = useMemo(() => portfolioItems.filter(item => item.id !== "7" && item.title !== "Cornetas aplicadas"), []); // Ajustado para usar ID
 
   // Removed: categoriesWithCount
 
@@ -139,31 +75,151 @@ export const PortfolioSection = () => {
     <Landmark role="main">
       <section id="trabalhos" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12"> {/* Reduced mb from 16 to 12 */}
             <h2 className="section-heading">Trabalhos</h2>
             <p className="section-description">
               Conheça alguns dos nossos projetos realizados, desde peças técnicas até objetos decorativos e acessórios personalizados.
             </p>
             <div className="section-divider"></div>
           </div>
+
+          {/* Item "Cornetas" em destaque */}
+          {cornetasItem && (
+            // <FocusIndicator key={cornetasItem.id} variant="card" className="mb-12"> // FocusIndicator removido para este item específico
+              <div
+                key={cornetasItem.id} // Adicionado key diretamente ao div
+                className={`gallery-item transition-transform rounded-lg mb-12 ${ // Adicionado mb-12 aqui
+                  reduceAnimations ? 'duration-0' : 'duration-300 hover:scale-105'
+                } bg-primary/10 shadow-xl overflow-hidden`} // Removido border-2 border-primary
+                role="article" // Changed role to article for semantic meaning
+                // tabIndex={0} // Removido, pois o foco será gerenciado pelos elementos internos clicáveis
+                aria-label={`Ver detalhes de ${cornetasItem.title}`}
+                // onKeyDown removido, pois o div principal não é mais o alvo primário de interação para abrir modal
+              >
+                <div className="md:flex"> {/* Flex layout for larger screens */}
+                  <div className="md:w-7/12 relative"> {/* Image container - Largura aumentada e Adicionado relative para botões do carrossel */}
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      className="w-full" // Removido h-full
+                    >
+                      <CarouselContent>
+                        <CarouselItem className="relative group">
+                          <LazyImage
+                            src={getAssetPath(cornetasItem.image)}
+                            alt={`${cornetasItem.title} - Imagem principal`}
+                            // aspectRatio="landscape" // Removido
+                            priority
+                            quality={imageQuality as 'low' | 'medium' | 'high'}
+                            className="w-full object-cover" // Removido h-64 md:h-full
+                          />
+                           <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute top-2 right-2 z-20 bg-background/50 hover:bg-background/80 text-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Impede que o clique no botão propague para outros elementos
+                              handleItemClick(cornetasItem);
+                            }}
+                            aria-label="Expandir imagem"
+                          >
+                            <Maximize2 className="h-5 w-5" />
+                          </Button>
+                        </CarouselItem>
+                        {cornetasItem.galleryImages?.map((imgSrc, idx) => (
+                          <CarouselItem key={idx} className="relative group">
+                            <LazyImage
+                              src={getAssetPath(imgSrc)}
+                              alt={`${cornetasItem.title} - Imagem ${idx + 2}`}
+                              // aspectRatio="landscape" // Removido
+                              quality={imageQuality as 'low' | 'medium' | 'high'}
+                              className="w-full object-cover" // Removido h-64 md:h-full
+                            />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="absolute top-2 right-2 z-20 bg-background/50 hover:bg-background/80 text-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleItemClick(cornetasItem);
+                              }}
+                              aria-label="Expandir imagem"
+                            >
+                              <Maximize2 className="h-5 w-5" />
+                            </Button>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      {(cornetasItem.galleryImages?.length ?? 0) > 0 && (
+                        <>
+                          <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/80 text-foreground" />
+                          <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/80 text-foreground" />
+                        </>
+                      )}
+                    </Carousel>
+                  </div>
+                  <div
+                    className="md:w-5/12 p-6 md:p-8 flex flex-col justify-center bg-background cursor-pointer text-center" // Added cursor-pointer here and adjusted width, Added text-center
+                    onClick={(e) => { // Added onClick here to open modal when text area is clicked
+                      e.stopPropagation();
+                      handleItemClick(cornetasItem);
+                    }}
+                    onKeyDown={(e) => { // Adicionado onKeyDown para acessibilidade na área de texto
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleItemClick(cornetasItem);
+                      }
+                    }}
+                    tabIndex={0} // Adicionado tabIndex para tornar a área de texto focável
+                  > {/* Text container */}
+                    <h3
+                      className="font-montserrat font-extrabold text-3xl sm:text-4xl text-primary mb-4" // Increased size and margin
+                    >
+                      {cornetasItem.title}
+                    </h3>
+                    <p
+                      className={`text-base text-muted-foreground md:text-justify ${ // Increased text size and added text-justify for md screens
+                        !expandedItems[cornetasItem.id] ? 'line-clamp-5' : '' // Increased line-clamp
+                      }`}
+                      onClick={(e) => toggleDescription(e, cornetasItem.id)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {cornetasItem.description}
+                    </p>
+                    <AccessibleButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDescription(e, cornetasItem.id);
+                      }}
+                      className="text-sm text-primary mt-3 hover:underline py-1 px-2 self-start" // Adjusted margin and self-start
+                      variant="ghost"
+                      size="sm"
+                      aria-expanded={expandedItems[cornetasItem.id]}
+                      aria-controls={`description-${cornetasItem.id}`}
+                    >
+                      {expandedItems[cornetasItem.id] ? 'Mostrar menos' : 'Mostrar mais'}
+                    </AccessibleButton>
+                  </div>
+                </div>
+              </div>
+            // </FocusIndicator> // FocusIndicator removido para este item específico
+          )}
           
-          {/* Filtros de categoria removidos conforme solicitado */}
-          
-          {/* Grid de itens */}
-          {/* Removed isLoading conditional and CardGridSkeleton as filters are gone.
-              If a general loading state for portfolioItems is ever needed, it would be separate.
-          */}
+          {/* Grid dos outros itens */}
+          {otherItems.length > 0 && (
             <div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
               role="grid"
-              aria-label={`Portfólio (${filteredItems.length} itens)`} // Simplified aria-label
+              aria-label={`Outros projetos (${otherItems.length} itens)`}
             >
-              {filteredItems.map((item, index) => (
+              {otherItems.map((item, index) => (
                 <FocusIndicator key={item.id} variant="card">
-                  <div 
-                    className={`gallery-item transition-transform ${
+                  <div
+                    className={`gallery-item transition-transform rounded-lg ${
                       reduceAnimations ? 'duration-0' : 'duration-300 hover:scale-105'
-                    } cursor-pointer`}
+                    } cursor-pointer shadow-md overflow-hidden bg-background`} // Added overflow-hidden and bg-background
                     onClick={() => handleItemClick(item)}
                     role="gridcell"
                     tabIndex={0}
@@ -178,49 +234,29 @@ export const PortfolioSection = () => {
                     <LazyImage
                       src={getAssetPath(item.image)}
                       alt={item.title}
-                      aspectRatio="landscape"
-                      priority={index < 3} // Primeiras 3 imagens com prioridade
+                      // aspectRatio="landscape" // Removido
+                      priority={index < 2} // Prioridade para os dois primeiros itens da grade
                       quality={imageQuality as 'low' | 'medium' | 'high'}
-                      className="w-full h-64"
+                      className="w-full object-cover rounded-t-lg" // Removido h-64
                     />
-                    <div className="p-4 bg-background">
-                      <h3 className="font-montserrat font-semibold text-lg mb-2">
+                    <div className="p-4 text-center"> {/* Removed conditional padding, Added text-center */}
+                      <h3
+                        className="font-montserrat font-semibold text-lg mb-2" // Standard style for other items
+                      >
                         {item.title}
                       </h3>
                       <p
-                        className={`text-sm text-muted-foreground ${
-                          item.title === "Cornetas" && !expandedItems[item.id] 
-                            ? 'line-clamp-4' 
-                            : item.title !== "Cornetas" 
-                              ? 'line-clamp-4' 
-                              : ''
-                        }`}
-                        onClick={(e) => item.title === "Cornetas" ? toggleDescription(e, item.id) : undefined}
-                        style={{ cursor: item.title === "Cornetas" ? 'pointer' : 'default' }}
+                        className="text-sm text-muted-foreground line-clamp-4" // Standard line-clamp
                       >
                         {item.description}
                       </p>
-                      {item.title === "Cornetas" && (
-                        <AccessibleButton
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleDescription(e, item.id);
-                          }}
-                          className="text-xs text-primary mt-2 hover:underline py-1 px-2"
-                          variant="ghost"
-                          size="sm"
-                          aria-expanded={expandedItems[item.id]}
-                          aria-controls={`description-${item.id}`}
-                        >
-                          {expandedItems[item.id] ? 'Mostrar menos' : 'Mostrar mais'}
-                        </AccessibleButton>
-                      )}
+                      {/* Botão "Mostrar mais/menos" removido para itens não-Cornetas, conforme lógica anterior */}
                     </div>
                   </div>
                 </FocusIndicator>
               ))}
             </div>
-          
+          )}
         </div>
 
         {/* Modal da galeria */}

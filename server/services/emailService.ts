@@ -25,7 +25,7 @@ class EmailService {
         port: parseInt(process.env.SMTP_PORT || '587'),
         secure: false, // true para 465, false para outras portas
         auth: {
-          user: process.env.SMTP_USER || 'luizgeronimo00@hotmail.com',
+          user: process.env.SMTP_USER || 'carossiparts@gmail.com',
           pass: process.env.SMTP_PASS || process.env.EMAIL_PASSWORD
         },
         tls: {
@@ -298,7 +298,7 @@ class EmailService {
             <h3>📞 Precisa de Ajuda?</h3>
             <p><strong>WhatsApp:</strong> <a href="https://api.whatsapp.com/send?phone=5554991886962">(54) 99188-6962</a></p>
             <p><strong>Instagram:</strong> <a href="https://www.instagram.com/carossiparts/">@carossiparts</a></p>
-            <p><strong>Email:</strong> <a href="mailto:luizgeronimo00@hotmail.com">luizgeronimo00@hotmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:carossiparts@gmail.com">carossiparts@gmail.com</a></p>
         </div>
 
         <div class="footer">
@@ -320,8 +320,8 @@ class EmailService {
     try {
       // Email para o administrador
       const adminMailOptions = {
-        from: `"Print3DPro Sistema" <${process.env.SMTP_USER || 'luizgeronimo00@hotmail.com'}>`,
-        to: 'luizgeronimo00@hotmail.com',
+        from: `"Print3DPro Sistema" <${process.env.SMTP_USER || 'carossiparts@gmail.com'}>`,
+        to: 'carossiparts@gmail.com',
         subject: `🎯 Nova Solicitação de Orçamento - ${data.fullName}`,
         html: this.generateEmailTemplate(data),
         priority: 'high' as const,
@@ -334,7 +334,7 @@ class EmailService {
 
       // Email de confirmação para o usuário
       const userMailOptions = {
-        from: `"Print3DPro" <${process.env.SMTP_USER || 'luizgeronimo00@hotmail.com'}>`,
+        from: `"Print3DPro" <${process.env.SMTP_USER || 'carossiparts@gmail.com'}>`,
         to: data.fullName.includes('@') ? data.fullName : undefined, // Só envia se tiver email
         subject: '✅ Confirmação: Sua solicitação de orçamento foi recebida',
         html: this.generateUserConfirmationTemplate(data)

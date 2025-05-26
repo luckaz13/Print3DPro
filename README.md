@@ -1,4 +1,4 @@
-# Print3DPro - Website Carossi Parts
+# Print3DPro - Website CarossiParts
 
 Website moderno e responsivo para empresa de impressão 3D, desenvolvido com React, TypeScript e Vite.
 

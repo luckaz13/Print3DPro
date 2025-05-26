@@ -79,7 +79,7 @@ O projeto Print3DPro é um site moderno e bem estruturado para uma empresa de im
 ```json
 {
   "name": "print3dpro-website",
-  "description": "Website oficial da Carossi Parts - Impressões 3D"
+  "description": "Website oficial da CarossiParts - Impressões 3D"
 }
 ```
 
@@ -87,9 +87,9 @@ O projeto Print3DPro é um site moderno e bem estruturado para uma empresa de im
 ```tsx
 // Adicionar ao index.html ou criar componente SEO
 <Helmet>
-  <title>Carossi Parts - Impressões 3D Personalizadas</title>
+  <title>CarossiParts - Impressões 3D Personalizadas</title>
   <meta name="description" content="Transformamos ideias em realidade com impressão 3D de alta qualidade. Peças personalizadas, protótipos e action figures." />
-  <meta property="og:title" content="Carossi Parts - Impressões 3D" />
+  <meta property="og:title" content="CarossiParts - Impressões 3D" />
   <meta property="og:description" content="Impressões 3D personalizadas com qualidade profissional" />
   <meta property="og:image" content="/carossi-social-preview.jpg" />
 </Helmet>
@@ -137,7 +137,7 @@ const useImageCache = () => {
 ```json
 // manifest.json já existe, implementar service worker
 {
-  "name": "Carossi Parts",
+  "name": "CarossiParts",
   "short_name": "Carossi",
   "theme_color": "#E53935"
 }

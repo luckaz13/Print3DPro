@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { AnimatedElement } from "@/components/ui/animated-element";
 import { MapPin, MessageCircle } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
+import { useState } from "react";
 
 export const ShopSection = () => {
+  const [isCustomProjectsExpanded, setIsCustomProjectsExpanded] = useState(false);
   return (
     <section id="onde-comprar" className="py-20 bg-muted">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,9 +86,16 @@ export const ShopSection = () => {
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-2/3 mb-6 md:mb-0 md:pr-6">
                   <h3 className="font-montserrat font-semibold text-xl mb-4">Para projetos personalizados</h3>
-                  <p className="text-muted-foreground">
-                    Para projetos novos, personalizados e sob demanda, fale conosco diretamente no WhatsApp. Nossos profissionais estão prontos para transformar sua ideia em realidade.
+                  <p className={`text-muted-foreground ${isCustomProjectsExpanded ? '' : 'line-clamp-3'}`}>
+                    Para projetos novos, personalizados e sob demanda, fale conosco diretamente no WhatsApp. Nossos profissionais estão prontos para transformar sua ideia em realidade. Oferecemos uma vasta gama de possibilidades, desde pequenas peças de reposição até protótipos complexos e itens de decoração exclusivos. Se você tem um arquivo 3D, podemos imprimi-lo. Se tem apenas uma ideia, nossa equipe de design pode ajudar a modelá-la.
                   </p>
+                  <Button
+                    variant="link"
+                    className="text-primary hover:text-primary/80 px-0 mt-2"
+                    onClick={() => setIsCustomProjectsExpanded(!isCustomProjectsExpanded)}
+                  >
+                    {isCustomProjectsExpanded ? "Mostrar menos" : "Mostrar mais"}
+                  </Button>
                 </div>
                 <div className="md:w-1/3 flex justify-center">
                   <Button

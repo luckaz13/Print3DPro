@@ -2,6 +2,7 @@ import { Switch, Route, Router } from "wouter";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
 import Analytics from "@/pages/Analytics";
+import { DarkModeToggle } from "@/components/ui/dark-mode-toggle";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Toaster } from "@/components/ui/toaster";
 import SEO from "@/components/SEO";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" component={Home} />
             <Route path="/analytics" component={Analytics} />
             <Route component={NotFound} />
+<DarkModeToggle />
           </Switch>
         </Router>
         <Toaster />

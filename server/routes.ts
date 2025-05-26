@@ -17,6 +17,10 @@ import { emailService } from "./services/emailService";
 import analyticsRoutes from "./routes/analytics";
 
 export async function registerRoutes(app: Application): Promise<void> {
+  if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+    console.error("FATAL ERROR: JWT_SECRET is not defined in production environment. Please set a strong, unique value for the JWT_SECRET environment variable.");
+    process.exit(1); // Exit the application with an error code
+  }
   // Rota de exemplo: criar usuário com validação Zod
   app.post("/api/users", async (req, res) => {
     const parseResult = insertUserSchema.safeParse(req.body);
@@ -48,7 +52,7 @@ export async function registerRoutes(app: Application): Promise<void> {
       const jwt = require("jsonwebtoken");
       const token = jwt.sign(
         { id: user.id, username: user.username },
-        process.env.JWT_SECRET || "changeme",
+        process.env.JWT_SECRET as string,
         { expiresIn: "1h" }
       );
       res.json({ token });
@@ -87,7 +91,6 @@ export async function registerRoutes(app: Application): Promise<void> {
 
         // Simular envio de email (sem configuração SMTP)
         // Em produção, descomente as linhas abaixo e configure o .env
-        /*
         const emailResult = await emailService.sendBudgetRequest({
           fullName,
           phone,
@@ -95,7 +98,9 @@ export async function registerRoutes(app: Application): Promise<void> {
           timestamp,
           userIP
         });
-        */
+
+        // Adicionar log do resultado do email para depuração, se necessário
+        console.log('[BUDGET EMAIL SENT]', emailResult);
 
         // Resposta simulada de sucesso
         console.log(`[BUDGET SUCCESS] Request logged for ${fullName} from IP: ${userIP}`);

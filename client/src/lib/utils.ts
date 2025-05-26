@@ -18,7 +18,7 @@ export function getAssetPath(path: string): string {
 
   // Em produção, sempre usa /Print3DPro/ como base
   // Em desenvolvimento, usa /
-  const isProduction = import.meta.env.PROD || import.meta.env.NODE_ENV === 'production'
+  const isProduction = import.meta.env.PROD
   const baseUrl = isProduction ? '/Print3DPro/' : '/'
   
   // Evita duplicar o base se já estiver presente

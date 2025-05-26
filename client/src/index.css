@@ -51,12 +51,34 @@
   * {
     @apply border-border;
   }
+  
+  /* Transições suaves para mudanças de tema */
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+  
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Garantir que todos os elementos tenham transições suaves */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  /* Desabilitar transições para elementos que preferem movimento reduzido */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0ms !important;
+    }
   }
 }
 
@@ -157,6 +179,79 @@
   
   .mobile-animation {
     @apply transition-all duration-200 ease-out;
+  }
+  
+  /* Classes específicas para dark mode */
+  .dark-mode-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  /* Melhor contraste para elementos interativos no dark mode */
+  .dark .interactive-element {
+    @apply ring-offset-background;
+  }
+  
+  /* Sombras otimizadas para dark mode */
+  .dark .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Melhor legibilidade para textos no dark mode */
+  .dark .text-contrast-high {
+    @apply text-foreground contrast-more:text-white;
+  }
+  
+  /* Bordas mais visíveis no dark mode */
+  .dark .border-visible {
+    @apply border-border/50;
+  }
+  
+  /* Backgrounds com melhor contraste */
+  .dark .bg-elevated {
+    @apply bg-card border border-border/20;
+  }
+  
+  /* Estilos específicos para o Dark Mode Toggle aprimorado */
+  .dark-mode-toggle-enhanced {
+    /* Garantir contraste mínimo WCAG AA (4.5:1) */
+    --toggle-contrast-light: rgba(0, 0, 0, 0.8);
+    --toggle-contrast-dark: rgba(255, 255, 255, 0.9);
+    --toggle-shadow-light: rgba(0, 0, 0, 0.1);
+    --toggle-shadow-dark: rgba(0, 0, 0, 0.3);
+    --toggle-border-light: rgba(0, 0, 0, 0.15);
+    --toggle-border-dark: rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Estados de foco aprimorados para acessibilidade */
+  .dark-mode-toggle-enhanced:focus-visible {
+    @apply ring-2 ring-primary/70 ring-offset-2 ring-offset-background;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  /* Contraste alto para usuários com necessidades especiais */
+  @media (prefers-contrast: high) {
+    .dark-mode-toggle-enhanced {
+      @apply border-2 border-foreground/30 shadow-lg;
+    }
+    
+    .dark .dark-mode-toggle-enhanced {
+      @apply border-foreground/50;
+    }
+  }
+  
+  /* Animações reduzidas para usuários sensíveis ao movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .dark-mode-toggle-enhanced * {
+      @apply transition-none;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 

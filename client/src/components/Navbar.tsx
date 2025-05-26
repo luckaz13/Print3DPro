@@ -8,6 +8,7 @@ import { TooltipCard } from "@/components/ui/enhanced-hover-card";
 import { useOptimizedScroll, useSmartCallback, usePerformanceOptimizations } from "@/hooks/use-performance";
 import { useDeviceInfo, usePrefersReducedMotion } from "@/hooks/use-mobile";
 import { Landmark, AccessibleButton, useFocusManagement, useKeyboardNavigation } from "@/components/ui/accessibility-helpers";
+import { DarkModeToggle } from "@/components/ui/dark-mode-toggle";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -91,63 +92,76 @@ export const Navbar = () => {
             : "bg-background"
         }`}
       >
-        <nav 
+        <nav
           className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between"
           aria-label="Navegação principal"
         >
           {/* Logo */}
           <div className="flex items-center">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className={`block w-32 sm:w-40 md:w-48 transition-transform ${
                 reduceAnimations ? 'duration-0' : 'duration-300 hover:scale-105'
               } focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md`}
-              aria-label="Carossi Parts - Página inicial"
+              aria-label="CarossiParts - Página inicial"
             >
               <CarossiLogo />
             </Link>
           </div>
           
-          {/* Botão do menu mobile */}
-          <AccessibleButton
-            id="mobile-menu-button"
-            className="md:hidden p-3 rounded-full hover:bg-muted transition-colors duration-300"
-            onClick={toggleMobileMenu}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
-            size="md"
-          >
-            <i 
-              className={`fa-solid ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl text-foreground transition-transform ${
-                reduceAnimations ? 'duration-0' : 'duration-300'
-              } ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}
-              aria-hidden="true"
+          {/* Controles do lado direito */}
+          <div className="flex items-center gap-2">
+            {/* Botão Dark Mode - sempre visível com contraste aprimorado */}
+            <DarkModeToggle
+              size={isMobile ? "md" : "lg"}
+              variant="enhanced"
+              showTooltip={!isMobile}
+              className="order-1 md:order-2"
             />
-          </AccessibleButton>
+            
+            {/* Botão do menu mobile */}
+            <AccessibleButton
+              id="mobile-menu-button"
+              className="md:hidden p-3 rounded-full hover:bg-muted transition-colors duration-300 order-2 md:order-1"
+              onClick={toggleMobileMenu}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+              size="md"
+            >
+              <i
+                className={`fa-solid ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl text-foreground transition-transform ${
+                  reduceAnimations ? 'duration-0' : 'duration-300'
+                } ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}
+                aria-hidden="true"
+              />
+            </AccessibleButton>
+          </div>
           
           {/* Menu de navegação */}
           <div
             id="mobile-menu"
             className={`${
-              mobileMenuOpen 
-                ? `block ${reduceAnimations ? '' : 'animate-in slide-in-from-top duration-300'} min-h-[200px]` 
+              mobileMenuOpen
+                ? `block ${reduceAnimations ? '' : 'animate-in slide-in-from-top duration-300'} min-h-[200px]`
                 : 'hidden'
-            } md:flex w-full md:w-auto mt-4 md:mt-0`}
+            } md:flex md:w-auto mt-4 md:mt-0`}
             role={isMobile ? "dialog" : undefined}
             aria-modal={isMobile && mobileMenuOpen ? "true" : undefined}
             aria-labelledby="mobile-menu-button"
           >
-            <AnimatedList
-              animation={reduceAnimations ? undefined : "fade-in"}
-              staggerDelay={reduceAnimations ? 0 : 100}
-              initialDelay={0}
-              duration={reduceAnimations ? 0 : 300}
-              className="flex flex-col md:flex-row md:space-x-8 font-montserrat font-medium"
-              role="list"
-            >
-              {menuItems.map((item, index) => (
-                <div key={item.id} className="relative group" role="listitem">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+              <div className="font-montserrat font-medium" role="list">
+                <AnimatedList
+                  className="md:flex md:flex-row md:space-x-8"
+                  itemClassName="md:max-w-max"
+                  animation={reduceAnimations ? undefined : "fade-in"}
+                  staggerDelay={reduceAnimations ? 0 : 100}
+                  initialDelay={0}
+                  duration={reduceAnimations ? 0 : 300}
+                >
+                {menuItems.map((item, index) => (
+                  <div key={item.id} className="relative group" role="listitem">
                   {hasTouch ? (
                     // Em dispositivos touch, não usar tooltip
                     <div>
@@ -156,7 +170,7 @@ export const Navbar = () => {
                         onClick={closeMobileMenu}
                       >
                         <span
-                          className={`block py-3 px-4 hover:text-primary transition-colors ${
+                          className={`block md:inline-block py-3 px-4 hover:text-primary transition-colors ${
                             reduceAnimations ? 'duration-0' : 'duration-300'
                           } relative min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md cursor-pointer`}
                           role="button"
@@ -190,7 +204,7 @@ export const Navbar = () => {
                         onClick={closeMobileMenu}
                       >
                         <span
-                          className={`block py-3 px-4 hover:text-primary transition-colors ${
+                          className={`block md:inline-block py-3 px-4 hover:text-primary transition-colors ${
                             reduceAnimations ? 'duration-0' : 'duration-300'
                           } relative min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md cursor-pointer`}
                           role="button"
@@ -217,7 +231,25 @@ export const Navbar = () => {
                   )}
                 </div>
               ))}
-            </AnimatedList>
+                </AnimatedList>
+              </div>
+              
+              {/* Seção adicional no menu mobile para Dark Mode */}
+              {isMobile && mobileMenuOpen && (
+                <div className="mt-6 pt-4 border-t border-border">
+                  <div className="flex items-center justify-between px-4">
+                    <span className="text-sm font-medium text-muted-foreground">
+                      Tema
+                    </span>
+                    <DarkModeToggle
+                      size="md"
+                      variant="enhanced"
+                      showTooltip={false}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </div>
@@ -225,7 +257,7 @@ export const Navbar = () => {
       {/* Overlay para fechar menu em mobile */}
       {mobileMenuOpen && isMobile && (
         <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/20 z-40 md:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />

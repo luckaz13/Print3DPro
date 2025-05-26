@@ -1,4 +1,5 @@
 import { AnimatedElement, AnimatedList } from "@/components/ui/animated-element";
+import { LazyImage } from "@/components/ui/lazy-image";
 import { TooltipCard } from "@/components/ui/enhanced-hover-card";
 import { Button } from "@/components/ui/button";
 import { Info, MessageCircle, Instagram, Mail } from "lucide-react";
@@ -7,12 +8,12 @@ import { BudgetForm } from "@/components/BudgetForm";
 
 export const QuoteSection = () => {
   return (
-    <section id="orcamentos" className="py-20 bg-foreground text-white">
+    <section id="orcamentos" className="py-20 bg-card text-card-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedElement animation="fade-in" duration={800}>
           <div className="text-center mb-16">
-            <h2 className="section-heading text-white">Orçamentos</h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <h2 className="section-heading text-card-foreground">Orçamentos</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-center">
               Os orçamentos são exclusivos para projetos personalizados. Fale conosco para desenvolvermos a sua ideia sob medida.
             </p>
             <div className="section-divider"></div>
@@ -21,19 +22,22 @@ export const QuoteSection = () => {
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 max-w-4xl mx-auto">
           <AnimatedElement animation="slide-right" duration={800} delay={200} className="md:w-1/2">
-            <img
+            <LazyImage
               src={getAssetPath("/carossi1.png")}
               alt="Design 3D sendo modelado"
               className="rounded-lg shadow-xl w-full h-auto hover:shadow-2xl transition-shadow duration-300"
+              aspectRatio="landscape"
+              showSkeleton={true}
+              quality="medium"
             />
           </AnimatedElement>
           
           <div className="md:w-1/2 space-y-8">
             <AnimatedElement animation="slide-left" duration={800} delay={400}>
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-750 transition-colors duration-300">
-                <h3 className="font-montserrat font-semibold text-xl mb-4 flex items-center">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+                <h3 className="font-montserrat font-semibold text-xl mb-4 flex items-center text-gray-100">
                   Como funciona
-                  <TooltipCard 
+                  <TooltipCard
                     tooltip="Processo simplificado para solicitar seu orçamento"
                     side="right"
                   >
@@ -57,7 +61,7 @@ export const QuoteSection = () => {
                       <span className="flex-shrink-0 bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
                         {item.num}
                       </span>
-                      <span className="group-hover:text-primary-foreground transition-colors duration-300">
+                      <span className="text-gray-300 group-hover:text-primary-foreground transition-colors duration-300">
                         {item.text}
                       </span>
                     </li>
@@ -68,8 +72,8 @@ export const QuoteSection = () => {
             
             {/* Botões de Contato */}
             <AnimatedElement animation="slide-left" duration={800} delay={600}>
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-750 transition-colors duration-300">
-                <h3 className="font-montserrat font-semibold text-xl mb-6 text-center">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+                <h3 className="font-montserrat font-semibold text-xl mb-6 text-center text-gray-100">
                   Entre em contato conosco
                 </h3>
                 <div className="flex flex-col gap-3">
@@ -108,7 +112,7 @@ export const QuoteSection = () => {
                     asChild
                   >
                     <a
-                      href="mailto:luizgeronimo00@hotmail.com"
+                      href="mailto:carossiparts@gmail.com"
                       className="flex items-center justify-center"
                     >
                       <Mail className="w-5 h-5 mr-2" />
@@ -126,10 +130,10 @@ export const QuoteSection = () => {
         <div className="mt-20">
           <AnimatedElement animation="fade-in" duration={800} delay={800}>
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-3xl font-bold text-card-foreground mb-4">
                 Formulário Online de Orçamento
               </h3>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Preencha o formulário abaixo para receber uma proposta personalizada diretamente em seu email
               </p>
             </div>

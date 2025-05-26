@@ -3,7 +3,6 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { PortfolioSection } from "@/components/PortfolioSection";
-import { QuoteSection } from "@/components/QuoteSection";
 import { ShopSection } from "@/components/ShopSection";
 import { Footer } from "@/components/Footer";
 import { usePageTracking, useSectionTracking } from "@/hooks/use-analytics";
@@ -16,7 +15,6 @@ const Home = () => {
   useSectionTracking('hero');
   useSectionTracking('about');
   useSectionTracking('portfolio');
-  useSectionTracking('quote');
   useSectionTracking('shop');
 
   useEffect(() => {
@@ -59,7 +57,6 @@ const Home = () => {
       <HeroSection />
       <AboutSection />
       <PortfolioSection />
-      <QuoteSection />
       <ShopSection />
       <Footer />
     </>
