@@ -1,0 +1,119 @@
+{
+  "name": "Print3DPro - Impressão 3D Profissional",
+  "short_name": "Print3DPro",
+  "description": "Serviços profissionais de impressão 3D com qualidade e precisão",
+  "start_url": "/Print3DPro/",
+  "scope": "/Print3DPro/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Print3DPro/generated-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Solicitar Orçamento",
+      "short_name": "Orçamento",
+      "description": "Solicite um orçamento rapidamente",
+      "url": "/Print3DPro/#orcamento",
+      "icons": [
+        {
+          "src": "/Print3DPro/generated-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Ver Portfólio",
+      "short_name": "Portfólio",
+      "description": "Veja nossos trabalhos realizados",
+      "url": "/Print3DPro/#portfolio",
+      "icons": [
+        {
+          "src": "/Print3DPro/generated-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/Print3DPro/1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Página inicial do Print3DPro"
+    },
+    {
+      "src": "/Print3DPro/2.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Versão mobile do Print3DPro"
+    }
+  ]
+}

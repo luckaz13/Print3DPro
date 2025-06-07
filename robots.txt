@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://luckaz13.github.io/Print3DPro/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines to index images
+User-agent: Googlebot-Image
+Allow: /img/
+Allow: /assets/
+
+# Allow all search engines to index CSS and JS
+User-agent: *
+Allow: /css/
+Allow: /js/
+Allow: /assets/
